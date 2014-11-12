@@ -20,5 +20,6 @@
     android:layout_height="wrap_content"
     android:horizontalSpacing="1dp"  
     android:verticalSpacing="1dp" 
+    android:listSelector="#00000000"
     />
 </LinearLayout>
