@@ -2,6 +2,7 @@ package com.lajps.picturemosaic;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 
 public class PlayActivity extends Activity
