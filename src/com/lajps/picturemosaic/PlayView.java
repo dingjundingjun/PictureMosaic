@@ -1,6 +1,7 @@
 package com.lajps.picturemosaic;
 
 
+import java.text.MessageFormat;
 import java.util.Random;
 
 import android.content.Context;
@@ -17,6 +18,7 @@ import android.widget.BaseAdapter;
 import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class PlayView extends GridView
 {
@@ -28,9 +30,9 @@ public class PlayView extends GridView
     /**单个格子的高度*/
     private int mPieceHeight;
     /**列数*/
-    private int mColumnCount;
+    private int mColumnCount = Util.PICTURE_COLUMN;
     /**行数*/
-    private int mRowCount;
+    private int mRowCount = Util.PICTURE_ROW;
     /***每个格子的drawable*/
     private Drawable mLumpDrawables[];
     private Drawable mEmptyDrawable;
@@ -47,9 +49,36 @@ public class PlayView extends GridView
     private boolean showBadge = false;
     /**是否铺满屏幕*/
     private boolean scaleScreen = true;
-    
+    /**移动的步数*/
+    private int mMoveCount = 0;
+    /**模式*/
+    public int mMode = Util.GAME_LEVEL_EASY;
 	public PlayView(Context context, AttributeSet attrs) {
 		super(context, attrs);
+	}
+	
+	public void setShowBadge(boolean showBadge) {
+		this.showBadge = showBadge;
+	}
+	
+	public void setColunmCount(int cc)
+	{
+		this.mColumnCount = cc;
+	}
+	
+	public void setRowCount(int row)
+	{
+		this.mRowCount = row;
+	}
+	
+	/*
+	 * 隐藏图片标记
+	 */
+	protected void hideBadge(){
+		for (int i = 0; i < mPositionWrap.length; i++) {
+			mPieceViews[i].setText(String.valueOf(""));
+		}
+		setShowBadge(false);
 	}
 	
 	protected void renderPuzzleImage(Bitmap pluzzleimage,int[] positionwrapAsign,String emptyPostionstr) {
@@ -76,17 +105,23 @@ public class PlayView extends GridView
 				this.mPositionWrap[i] = positionwrapAsign[i];
 			}
 		}
-		if(emptyPostionstr == null){
-			emptyPostion = random.nextInt(mPositionWrap.length);
-		}else{
-			emptyPostion = Integer.parseInt(emptyPostionstr);
-		}
-		
-		initImageViews();
+		resetEmpayPosition();
 		adapter = new LumpAdapter();
+		initImageViews();
 		setNumColumns(mColumnCount);
 		this.setAdapter(adapter);
 		hasRendered = true;
+	}
+	
+	/*
+	 * 显示图片标记
+	 */
+	protected void showBadge(){
+		for (int i = 0; i < mPositionWrap.length; i++) {
+			int imgIdx = mPositionWrap[i];
+			mPieceViews[i].setText(String.valueOf(imgIdx));
+		}
+		 setShowBadge(true);
 	}
 	
 	public boolean isShowBadge() {
@@ -139,16 +174,48 @@ public class PlayView extends GridView
 		}
 	}
 	
+	public boolean solvability(int order[], int size){
+	    int a;
+	    int count = 0;
+	    int m = 0;
+	    int n = 0;
+	    
+	    int len = order.length;
+//	    size = size || 3;
+	    //[0,1,2,3,4,5,7,6,8]
+	    for(int i=0; i<len; i++){
+	        a = order[i];
+	        //if( a == 8){
+	        if(a == size*size-1){
+	            m = i / size;
+	            n = i % size;
+	        }
+	        for(int j=i+1; j<len; j++){
+	            
+	            if(order[j]<a){
+	                count++;
+	            }
+	        }
+	    }
+	    count += m;
+	    count += n;
+	    return count%2 == 0;
+	}
+	
 	/*
 	 * 打乱图片顺序
 	 */
 	protected void wrapposition() {
-		for (int i = 0; i < 10; i++) {
+		for (int i = 0; i < mPositionWrap.length / 2; i++) {
 			int p1 = random.nextInt(mPositionWrap.length);
 			int p2 = random.nextInt(mPositionWrap.length);
 			if (p1 != p2) {
 				wrapPosition(p1, p2);
 			}
+		}
+		if(!solvability(mPositionWrap, mMode))
+		{
+			wrapposition();
 		}
 		if (isOriginalPosition()) {
 			wrapposition();
@@ -203,5 +270,114 @@ public class PlayView extends GridView
 			return mPieceViews[position];
 		}
 
+	}
+	
+	/*
+	 * 设置 点击事件换图片位置
+	 */
+	@Override
+	public boolean performItemClick(View view, int position, long id) {
+		if (emptyPostion < 0 || mPositionWrap[position] == emptyPostion) {
+			return true;
+		}
+		int leftpoint = -1;
+		int rightpoint = -1;
+		int toppoint = -1;
+		int bottompoint = -1;
+		
+		if (position % mColumnCount != 0) {
+			leftpoint = position - 1;
+			if (mPositionWrap[leftpoint] == this.emptyPostion) {
+				wrapOneStep(leftpoint, position);
+				return true;
+			}
+		}
+		if (position / mColumnCount >= 1) {
+			toppoint = position - mColumnCount;
+			if (mPositionWrap[toppoint] == this.emptyPostion) {
+				wrapOneStep(toppoint, position);
+				return true;
+			}
+		}
+		if (position % mColumnCount != mColumnCount - 1) {
+			rightpoint = position + 1;
+			if (mPositionWrap[rightpoint] == this.emptyPostion) {
+				wrapOneStep(rightpoint, position);
+				return true;
+			}
+		}
+		if (position / mColumnCount < mRowCount - 1) {
+			bottompoint = position + mColumnCount;
+			if (mPositionWrap[bottompoint] == this.emptyPostion) {
+				wrapOneStep(bottompoint, position);
+				return true;
+			}
+		}
+		
+		return true;
+	}
+	
+	public void setMoveCount(int moveCount) {
+		this.mMoveCount = moveCount;
+	}
+	
+	/*
+	 * 交换两个位置的索引
+	 */
+	private void wrapOneStep(int p1, int p2) {
+		mMoveCount++;
+		int pv1 = mPositionWrap[p1];
+		int pv2 = mPositionWrap[p2];
+		wrapPosition(p1, p2);
+		if (pv2 != emptyPostion) {
+			mPieceViews[p1].setBackgroundDrawable(mLumpDrawables[pv2]);
+			mPieceViews[p2].setBackgroundDrawable(mEmptyDrawable);
+ 
+		} else {
+			mPieceViews[p1].setBackgroundDrawable(mEmptyDrawable);
+			mPieceViews[p2].setBackgroundDrawable(mLumpDrawables[pv1]);
+ 
+		}
+		if(this.isShowBadge()){
+			mPieceViews[p1].setText(String.valueOf(pv2));
+			mPieceViews[p2].setText(String.valueOf(pv1));
+		}
+		
+		if (isOriginalPosition()) {
+			successPuzzle();
+		 }
+		
+
+	}
+	
+	/*
+	 * 重新设置emptyPostion
+	 */
+	protected void resetEmpayPosition(){
+		emptyPostion = mPositionWrap.length - 1;
+	}
+	
+	public boolean isScaleScreen() {
+		return this.scaleScreen;
+	}
+	
+	public void setScaleScreen(boolean scaleScreen) {
+		this.scaleScreen = scaleScreen;
+	}
+	
+	void successPuzzle(){
+		mPieceViews[emptyPostion].setBackgroundDrawable(mLumpDrawables[emptyPostion]);
+		this.emptyPostion = -1;
+		showSuccessToast();
+	}
+	
+	void showSuccessToast() {
+		String msg = MessageFormat.format(getContext().getResources().getString(R.string.puzzleSuccessfull), System.getProperty("line.separator"),String.valueOf(getMoveCount()));
+		Toast.makeText(getContext(),msg, Toast.LENGTH_LONG).show();
+		//Toast.makeText(getContext(), "fdljflds"+System.getProperty("line.separator")+"fjjfldjflds", 10).show();
+    }
+	
+	public int getMoveCount() {
+		return this.mMoveCount;
 	}
 }

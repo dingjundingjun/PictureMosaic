@@ -17,6 +17,14 @@ public class Util
 		R.drawable.pic_13,R.drawable.pic_14,R.drawable.pic_15,R.drawable.pic_16,
 		R.drawable.pic_17,R.drawable.pic_18,R.drawable.pic_19,R.drawable.pic_20};
 	
+	/**拼图的行和列数*/
+	public static int PICTURE_COLUMN = 3;
+	public static int PICTURE_ROW = 3;
+	/**游戏级别*/
+	public static int GAME_LEVEL_EASY = 3;
+	public static int GAME_LEVEL_ORIGINAL = 4;
+	public static int GAME_LEVEL_HARD = 5;
+	
 	public static BitmapDrawable getClipBitmapDrawable(Context context,int id)
 	{
 		BitmapDrawable drawable = null;

@@ -14,9 +14,8 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Button;
 import android.widget.GridView;
 
-public class MainActivity extends Activity implements OnClickListener
+public class MainActivity extends Activity
 {
-	private Button mBtnMode;
 	private GridView mGridView;
 	private final int MODE_MOSAIC = 0;
 	private final int MODE_WALLER = 1;
@@ -35,8 +34,6 @@ public class MainActivity extends Activity implements OnClickListener
 	
 	public void init()
 	{
-		mBtnMode = (Button)findViewById(R.id.btn_mode);
-		mBtnMode.setOnClickListener(this);
 		mGridView = (GridView)findViewById(R.id.grid_view);
 		WindowManager wm = (WindowManager) getSystemService(Context.WINDOW_SERVICE);
 		int width = wm.getDefaultDisplay().getWidth();
@@ -60,18 +57,5 @@ public class MainActivity extends Activity implements OnClickListener
 				startActivity(intent);
 			}
 		});
-	}
-
-	
-	public void onClick(View view)
-	{
-		switch(view.getId())
-		{
-			case R.id.btn_mode:
-			{
-				mode = (mode == MODE_MOSAIC ? 1:0);
-				break;
-			}
-		}
 	}
 }

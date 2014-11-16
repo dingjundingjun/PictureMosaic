@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <item
+        android:id="@+id/reStrartGame"
+        android:title="@string/menu_restartGame">
+    </item>
+    <item
+        android:id="@+id/displayOriginalPic"
+        android:title="@string/menu_displayOriginalPic">
+    </item>
+    <item
+        android:id="@+id/displayPuzzleView"
+        android:title="@string/menu_displayPuzzleView"
+        android:visible="false">
+    </item>
+    <item
+        android:id="@+id/displayBadge"
+        android:title="@string/menu_displayBadge">
+    </item>
+    <item
+        android:id="@+id/hideBadge"
+        android:title="@string/menu_hideBadge"
+        android:visible="false">
+    </item>
+   
+    <!-- <item
+        android:id="@+id/scaleScreen"
+        android:title="@string/menu_scaleScreen"/>
+    <item
+        android:id="@+id/scaleFit"
+        android:title="@string/menu_scaleFit"
+        android:visible="false"/>
+    <item
+        android:id="@+id/changePic"
+        android:title="@string/menu_changePic"/> -->
+    <item
+        android:id="@+id/changeLevel"
+        android:title="@string/menu_changeLevel"/>
+
+</menu>

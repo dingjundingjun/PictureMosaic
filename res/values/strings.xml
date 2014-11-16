@@ -1,9 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">PictureMosaic</string>
+    <string name="app_name">拼图</string>
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
 	<string name="btn_mode_waller">壁纸</string>
 	<string name="btn_mode_mosaic">拼图</string>
+	<string name="puzzleSuccessfull">拼图成功{0}您一共移动了{1}步</string>
+	 <string name="menu_restartGame">重新开始</string>
+    <string name="menu_displayBadge">显示标记</string>
+    <string name="menu_hideBadge">隐藏标记</string>
+    <string name="menu_displayOriginalPic">显示原图</string>
+    <string name="menu_displayPuzzleView">显示拼图</string>
+    <string name="menu_scaleScreen">铺满屏幕</string>
+    <string name="menu_scaleFit">不铺满屏幕</string>
+    <string name="menu_changePic">换图</string>
+    <string name="menu_changeLevel">切换难度</string>
+    <string name="menu_more">更多</string>
+    <string name="level_easy">简单（3*3）</string>
+    <string name="level_orig">中等（4*4）</string>
+    <string name="level_hard">困难（5*5）</string>
 </resources>

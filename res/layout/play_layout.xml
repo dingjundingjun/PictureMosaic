@@ -1,13 +1,43 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/puzzleContainer"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical" >
+     <RelativeLayout 
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/play_layout" 
+    
+    >
+    <com.lajps.picturemosaic.PlayView
+   android:layoutAnimation="@anim/layout_grid_inverse_fade"
+   android:id="@+id/puzzleviewFit"
+   android:layout_width="match_parent"
+   android:layout_height="match_parent"
+   android:visibility="invisible"
+   />
 <com.lajps.picturemosaic.PlayView
     android:id="@+id/playview"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+   	android:listSelector="#00000000"
     />
     
+</RelativeLayout>
 
+        <ImageView 
+      android:clickable="true"
+      android:id="@+id/originalPicView"
+      android:scaleType="fitCenter"
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      android:visibility="gone" />
+  <TextView 
+      android:id="@+id/gameOvelLabel"
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      android:gravity="center"
+      android:visibility="invisible"
+      />
 </LinearLayout>
