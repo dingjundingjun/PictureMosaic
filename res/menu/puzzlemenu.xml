@@ -3,24 +3,28 @@
 
     <item
         android:id="@+id/reStrartGame"
-        android:title="@string/menu_restartGame">
+        android:icon="@drawable/btn_restart"
+        >
     </item>
     <item
         android:id="@+id/displayOriginalPic"
-        android:title="@string/menu_displayOriginalPic">
+        android:icon="@drawable/btn_show_picture"
+       >
     </item>
     <item
         android:id="@+id/displayPuzzleView"
-        android:title="@string/menu_displayPuzzleView"
+        android:icon="@drawable/btn_show_p"
+        
         android:visible="false">
     </item>
     <item
         android:id="@+id/displayBadge"
-        android:title="@string/menu_displayBadge">
+        android:icon="@drawable/btn_show_tag"
+        >
     </item>
     <item
         android:id="@+id/hideBadge"
-        android:title="@string/menu_hideBadge"
+        android:icon="@drawable/btn_hide_tag"
         android:visible="false">
     </item>
    
@@ -36,6 +40,7 @@
         android:title="@string/menu_changePic"/> -->
     <item
         android:id="@+id/changeLevel"
-        android:title="@string/menu_changeLevel"/>
+        android:icon="@drawable/btn_change_g"
+        />
 
 </menu>
