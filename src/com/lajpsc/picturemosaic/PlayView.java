@@ -1,4 +1,4 @@
-package com.lajps.picturemosaic;
+package com.lajpsc.picturemosaic;
 
 
 import java.text.MessageFormat;

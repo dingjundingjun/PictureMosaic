@@ -10,18 +10,22 @@
     android:text="@string/level_easy"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
+    android:layout_marginTop="57dip"
+    android:background="@drawable/btn_choose"
     />
  <Button 
     android:id="@+id/level_orig"
     android:text="@string/level_orig"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
+    android:background="@drawable/btn_choose"
     />
  <Button 
     android:id="@+id/level_hard"
     android:text="@string/level_hard"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
+    android:background="@drawable/btn_choose"
     />   
 
 </LinearLayout>

@@ -1,5 +1,6 @@
-package com.lajps.picturemosaic;
+package com.lajpsc.picturemosaic;
 
+import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
 import android.view.View;
@@ -12,11 +13,11 @@ public class LevelDialog extends Dialog implements android.view.View.OnClickList
 		mOnChooseListener = oc;
 	}
 	
-	public LevelDialog(Context context) {
-		super(context);
+	public LevelDialog(Context context, int mydialog) {
+		super(context,mydialog);
 		init();
 	}
-	
+
 	public void init()
 	{
 		this.setContentView(R.layout.level_dialog);

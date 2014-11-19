@@ -1,4 +1,4 @@
-package com.lajps.picturemosaic;
+package com.lajpsc.picturemosaic;
 
 import android.app.Activity;
 import android.content.Context;
@@ -39,6 +39,8 @@ public class MainActivity extends Activity
 		int width = wm.getDefaultDisplay().getWidth();
 		int height = wm.getDefaultDisplay().getHeight();
 		
+		Util.SCREEN_WIDTH = width;
+		Util.SCREEN_HEIGHT = height;
 		PIC_WIDTH = width / 3;
 		PIC_HEIGHT = PIC_WIDTH;
 		Log.d(TAG, "PIC_WIDTH = " + width + " 11111111111111111111111 === " + height);

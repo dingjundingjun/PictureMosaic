@@ -1,6 +1,6 @@
-package com.lajps.picturemosaic;
+package com.lajpsc.picturemosaic;
 
-import com.lajps.picturemosaic.LevelDialog.onChooseListener;
+import com.lajpsc.picturemosaic.LevelDialog.onChooseListener;
 
 import android.app.Activity;
 import android.app.Dialog;
@@ -14,6 +14,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
 import android.view.animation.AccelerateInterpolator;
 import android.view.animation.Animation;
 import android.view.animation.DecelerateInterpolator;
@@ -46,6 +47,8 @@ public class PlayActivity extends Activity
 		mOriginalView = (ImageView) findViewById(R.id.originalPicView);
 		
 		mBitmapForGame = BitmapFactory.decodeResource(this.getResources(),Util.gPic[mID]);
+		mBitmapForGame = mBitmapForGame.createScaledBitmap(mBitmapForGame,
+				Util.SCREEN_WIDTH, Util.SCREEN_HEIGHT - 64, true);
 		mPlayView.mMode = Util.GAME_LEVEL_EASY;
 		mPlayView.renderPuzzleImage(mBitmapForGame,null,"8");
 		mOriginalView.setBackgroundResource(Util.gPic[mID]);
@@ -56,7 +59,7 @@ public class PlayActivity extends Activity
 	}
 	
 	/*
-	 * 创建menu
+	 * 鍒涘缓menu
 	 */
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
@@ -75,7 +78,7 @@ public class PlayActivity extends Activity
 	}
 	
 	/*
-	 * 重新开始游戏
+	 * 閲嶆柊寮�濮嬫父鎴�
 	 */
 	private void restartGame() {
 		mPlayView.resetEmpayPosition();
@@ -157,7 +160,7 @@ public class PlayActivity extends Activity
 	}
 	
 	/*
-	 * 显示拼图view
+	 * 鏄剧ず鎷煎浘view
 	 */
 	private void showPuzzleView(){
 		applyRotation(false, 180, 90);
@@ -218,7 +221,7 @@ public class PlayActivity extends Activity
 //			break;
 //		}
 		case R.id.changeLevel:{
-			LevelDialog dialog = new LevelDialog(this);
+			LevelDialog dialog = new LevelDialog(PlayActivity.this,R.style.MyDialog);
 			dialog.setChooseListener(new onChooseListener() {
 				
 				public void choose(int mode) {
@@ -259,7 +262,7 @@ public class PlayActivity extends Activity
 	}
 	
 	/*
-	 * 渲染新的图片
+	 * 娓叉煋鏂扮殑鍥剧墖
 	 */
 	private void renderNewImage(){
 		 mPlayView.setMoveCount(0);
@@ -267,7 +270,7 @@ public class PlayActivity extends Activity
 	}
 	
 	/*
-	 * 初始化拼图的view
+	 * 鍒濆鍖栨嫾鍥剧殑view
 	 */
 	private void initPuzzleView() {
 		mPlayView.renderPuzzleImage(mBitmapForGame,null,"8");
@@ -289,7 +292,7 @@ public class PlayActivity extends Activity
 	}
 	
 	/*
-     * 将图片渲染为合适大小
+     * 灏嗗浘鐗囨覆鏌撲负鍚堥�傚ぇ灏�
      */
 	private void scaleImgFit() {
 //		 initScalScreenMenu(false);

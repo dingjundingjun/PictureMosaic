@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.lajps.picturemosaic;
+package com.lajpsc.picturemosaic;
 
 import android.view.animation.Animation;
 import android.view.animation.Transformation;

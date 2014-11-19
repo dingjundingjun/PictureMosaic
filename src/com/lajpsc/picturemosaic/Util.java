@@ -1,4 +1,4 @@
-package com.lajps.picturemosaic;
+package com.lajpsc.picturemosaic;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,8 +14,7 @@ public class Util
 		R.drawable.pic_2, R.drawable.pic_3, R.drawable.pic_4,
 		R.drawable.pic_5, R.drawable.pic_6,R.drawable.pic_7,R.drawable.pic_8,
 		R.drawable.pic_9,R.drawable.pic_10,R.drawable.pic_11,R.drawable.pic_12,
-		R.drawable.pic_13,R.drawable.pic_14,R.drawable.pic_15,R.drawable.pic_16,
-		R.drawable.pic_17,R.drawable.pic_18,R.drawable.pic_19,R.drawable.pic_20};
+		R.drawable.pic_13,R.drawable.pic_14};
 	
 	/**拼图的行和列数*/
 	public static int PICTURE_COLUMN = 3;
@@ -24,7 +23,8 @@ public class Util
 	public static int GAME_LEVEL_EASY = 3;
 	public static int GAME_LEVEL_ORIGINAL = 4;
 	public static int GAME_LEVEL_HARD = 5;
-	
+	public static int SCREEN_WIDTH;
+	public static int SCREEN_HEIGHT;
 	public static BitmapDrawable getClipBitmapDrawable(Context context,int id)
 	{
 		BitmapDrawable drawable = null;
@@ -74,6 +74,7 @@ public class Util
 		for(int i = 0 ; i < pic.length ; i++)
 		{
 			list.add(getimage(context, pic[i]));
+//			list.add(new BitmapDrawable(BitmapFactory.decodeResource(context.getResources(), pic[i])));
 		}
 		return list;
 	}
