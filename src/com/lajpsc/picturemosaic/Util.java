@@ -63,8 +63,21 @@ public class Util
 		bitmap = BitmapFactory.decodeResource(context.getResources(), id,newOpts);
 		int width = bitmap.getWidth();
 		int height = bitmap.getHeight();
-		int dx = (width - height)/2;
-		Bitmap bmpTemp = bitmap.createBitmap(bitmap, dx, 0, height, height, null, false);
+		int dx = 0;
+		int tempWidth = 0;
+		Bitmap bmpTemp;
+		if(width - height >= 0)
+		{
+			dx = (width - height)/2;
+			tempWidth = height;
+			bmpTemp = bitmap.createBitmap(bitmap, dx, 0, tempWidth, tempWidth, null, false);
+		}
+		else
+		{
+			dx = (height - width)/2;
+			tempWidth = width;
+			bmpTemp = bitmap.createBitmap(bitmap, 0, dx, tempWidth, tempWidth, null, false);
+		}
 		return new BitmapDrawable(bmpTemp);//压缩好比例大小后再进行质量压缩
 	}
 	

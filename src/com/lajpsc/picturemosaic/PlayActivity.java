@@ -1,20 +1,23 @@
 package com.lajpsc.picturemosaic;
 
+import org.apache.http.Header;
+import org.json.JSONObject;
+
 import com.lajpsc.picturemosaic.LevelDialog.onChooseListener;
+import com.loopj.android.http.AsyncHttpClient;
+import com.loopj.android.http.TextHttpResponseHandler;
 
 import android.app.Activity;
-import android.app.Dialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.Window;
 import android.view.animation.AccelerateInterpolator;
 import android.view.animation.Animation;
 import android.view.animation.DecelerateInterpolator;
@@ -31,6 +34,9 @@ public class PlayActivity extends Activity
 	private ImageView mOriginalView;
 	private boolean bShowBadge = false;
 	private boolean mScaleScreen = false;
+	private View mAdViewParent;
+	
+	//http://genius.sinaapp.com/checkAD.php/
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -38,6 +44,7 @@ public class PlayActivity extends Activity
 		mID = intent.getIntExtra("id", -1);
 		setContentView(R.layout.play_layout);
 		init();
+		isShowAd();
 	}
 	
 	public void init()
@@ -54,8 +61,9 @@ public class PlayActivity extends Activity
 		mOriginalView.setBackgroundResource(Util.gPic[mID]);
 		
 		mContainer = (ViewGroup) findViewById(R.id.puzzleContainer);
-		mContainer
-				.setPersistentDrawingCache(ViewGroup.PERSISTENT_ANIMATION_CACHE);
+		mContainer.setPersistentDrawingCache(ViewGroup.PERSISTENT_ANIMATION_CACHE);
+		
+		mAdViewParent = findViewById(R.id.adParent);
 	}
 	
 	/*
@@ -291,24 +299,30 @@ public class PlayActivity extends Activity
 		this.mScaleScreen = scaleScreen;
 	}
 	
-	/*
-     * 灏嗗浘鐗囨覆鏌撲负鍚堥�傚ぇ灏�
-     */
-	private void scaleImgFit() {
-//		 initScalScreenMenu(false);
-//	     this.setScaleScreen(false);
-//		 if(puzzleViewFit.isHasRendered()){
-//			 puzzleViewFit.resetPosition(puzzleViewScreen.getPositionwrap());
-//			 puzzleViewFit.setEmptyPostion(puzzleViewScreen.getEmptyPostion());
-//			 puzzleViewFit.initImageViews();
-//			
-//		 }else{
-//			 puzzleViewFit.renderPuzzleImage(this.isScaleScreen()?imgBitmapForScreen:imgBitmapForFit,puzzleViewScreen.getPositionwrap(),String.valueOf(puzzleViewScreen.getEmptyPostion()));
-//		 }
-//		 puzzleViewFit.setMoveCount(puzzleViewScreen.getMoveCount());
-//		 
-//		 setPuzzleView();
-//		
-//		 initBadeAfterChagne();
+
+	private void isShowAd(){
+
+		new AsyncHttpClient().get("http://genius.sinaapp.com/checkAD.php/", new TextHttpResponseHandler() {
+			
+			@Override
+			public void onSuccess(int arg0, Header[] arg1, String arg2) {
+				// TODO Auto-generated method stub
+				//enable
+				if(true == arg2.equals("enable")){
+					
+					System.out.println( " ================= arg2 == " + arg2);	
+					mAdViewParent.setVisibility(View.VISIBLE);
+				}
+				else{
+					
+					mAdViewParent.setVisibility(View.INVISIBLE);
+				}
+			}
+			
+			@Override
+			public void onFailure(int arg0, Header[] arg1, String arg2, Throwable arg3) {
+				// TODO Auto-generated method stub	
+			}
+		});
 	}
 }	

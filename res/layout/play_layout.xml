@@ -3,52 +3,61 @@
     android:id="@+id/puzzleContainer"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#ffffffff"
+    android:background="#ff000000"
     android:orientation="vertical" >
-    <LinearLayout 
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="960dip"
-        android:orientation="vertical"
-        >
-     <RelativeLayout 
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:id="@+id/play_layout" 
-    
-    >
-    <com.lajpsc.picturemosaic.PlayView
-   android:layoutAnimation="@anim/layout_grid_inverse_fade"
-   android:id="@+id/puzzleviewFit"
-   android:layout_width="match_parent"
-   android:layout_height="match_parent"
-   android:visibility="invisible"
-   />
-<com.lajpsc.picturemosaic.PlayView
-    android:id="@+id/playview"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-   	android:listSelector="#00000000"
-    />
-    
-</RelativeLayout>
+        android:orientation="vertical" >
 
-        <ImageView 
-      android:clickable="true"
-      android:id="@+id/originalPicView"
-      android:scaleType="fitCenter"
-      android:layout_width="match_parent"
-      android:layout_height="match_parent"
-      android:visibility="gone" />
-  <TextView 
-      android:id="@+id/gameOvelLabel"
-      android:layout_width="match_parent"
-      android:layout_height="match_parent"
-      android:gravity="center"
-      android:visibility="invisible"
-      />
-  </LinearLayout>
-  <com.baidu.mobads.AdView
-      android:layout_width="match_parent"
-      android:layout_height="wrap_content"
-      />
+        <RelativeLayout
+            android:id="@+id/play_layout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" >
+
+            <com.lajpsc.picturemosaic.PlayView
+                android:id="@+id/puzzleviewFit"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layoutAnimation="@anim/layout_grid_inverse_fade"
+                android:visibility="invisible" />
+
+            <com.lajpsc.picturemosaic.PlayView
+                android:id="@+id/playview"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:listSelector="#00000000" />
+        </RelativeLayout>
+
+        <ImageView
+            android:id="@+id/originalPicView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:clickable="true"
+            android:scaleType="fitCenter"
+            android:visibility="gone" />
+
+        <TextView
+            android:id="@+id/gameOvelLabel"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:visibility="invisible" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/adParent"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:background="#FFFFFF"  >
+<!-- 
+        <com.newqm.sdkoffer.AdView
+        android:id="@+id/adView"
+        android:layout_width="fill_parent"
+        android:layout_height="60dip"
+        /> -->
+    </LinearLayout>
+
 </LinearLayout>
