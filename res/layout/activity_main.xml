@@ -30,12 +30,12 @@
     android:verticalSpacing="1dp" 
     android:listSelector="#00000000"
     />
-<!-- 
- <com.newqm.sdkoffer.AdView
-     	android:layout_alignParentBottom="true"
+
+ <com.guomob.banner.GuomobAdView
+      android:layout_alignParentBottom="true"
         android:id="@+id/adView"
         android:layout_width="fill_parent"
         android:layout_height="60dip"
-        /> -->
+        />
  </RelativeLayout>
 </LinearLayout>

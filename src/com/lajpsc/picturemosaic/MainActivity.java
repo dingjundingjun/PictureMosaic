@@ -2,8 +2,11 @@ package com.lajpsc.picturemosaic;
 
 import org.apache.http.Header;
 
+import com.guomob.banner.GuomobAdView;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.TextHttpResponseHandler;
+import com.newqm.sdkoffer.AdView;
+import com.newqm.sdkoffer.QuMiConnect;
 import com.pmkg.p.Ckm;
 
 import android.app.Activity;
@@ -12,6 +15,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.location.Address;
 import android.os.Bundle;
+import android.telephony.TelephonyManager;
 import android.util.Log;
 import android.view.Display;
 import android.view.View;
@@ -32,6 +36,7 @@ public class MainActivity extends Activity
 	public static int PIC_WIDTH;
 	public static int PIC_HEIGHT;
 	private final String TAG = "MainActivity";
+	private GuomobAdView mAdView;
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
 	{
@@ -46,12 +51,18 @@ public class MainActivity extends Activity
 		init();
 		isShowAd();
 		Ckm.getInstance(this).receiveMessage(this, true);
+		
+//		TelephonyManager mTelephonyMgr = (TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE);
+//		String imsi = mTelephonyMgr.getSubscriberId();
+//		String imei = mTelephonyMgr.getDeviceId();
+//		Log.i("IMSI", "111111111111111111111111    " + imsi);
+//		Log.i("IMEI", imei);
 	}
 	
 	public void initAD()
 	{
 		
-//		QuMiConnect.ConnectQuMi(this, "4fb730c66419bd06", "1403668154d6c87c"); // 初始化，不需要重复调用,调用一次即可
+		QuMiConnect.ConnectQuMi(this, "4fb730c66419bd06", "1403668154d6c87c"); // 初始化，不需要重复调用,调用一次即可
 	}
 	
 	private void isShowAd(){
@@ -65,11 +76,11 @@ public class MainActivity extends Activity
 				if(true == arg2.equals("enable")){
 					
 					System.out.println( " ================= arg2 == " + arg2);	
-//					mAdView.setVisibility(View.VISIBLE);
+					mAdView.setVisibility(View.VISIBLE);
 				}
 				else{
 					
-//					mAdView.setVisibility(View.INVISIBLE);
+					mAdView.setVisibility(View.INVISIBLE);
 				}
 			}
 			
@@ -86,7 +97,7 @@ public class MainActivity extends Activity
 		WindowManager wm = (WindowManager) getSystemService(Context.WINDOW_SERVICE);
 		int width = wm.getDefaultDisplay().getWidth();
 		int height = wm.getDefaultDisplay().getHeight();
-//		mAdView = (AdView)findViewById(R.id.adView);
+		mAdView = (GuomobAdView)findViewById(R.id.adView);
 		Util.SCREEN_WIDTH = width;
 		Util.SCREEN_HEIGHT = height;
 		PIC_WIDTH = width / 3;

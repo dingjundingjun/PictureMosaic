@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.lajpsc.picturemosaic"
-    android:versionCode="1"
-    android:versionName="1.0" >
+    android:versionCode="2"
+    android:versionName="1.1.1" >
 
     <uses-sdk
         android:minSdkVersion="8"
@@ -14,6 +14,7 @@
 	<uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
 	<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 	<uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+	<uses-permission android:name="android.permission.WAKE_LOCK" />
 	<!-- 以下为可选权限 -->
   	<uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
   	<uses-permission android:name="android.permission.RECORD_AUDIO" /> 
@@ -28,6 +29,7 @@
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
         android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen" >
+        <meta-data android:name="guomobid"  android:value="appid:sgpbn3mctxr5559" />
         <meta-data android:name="cooId" android:value="f946b3d4086249a6968aabec7c752027" />
 		<meta-data android:name="channelId" android:value="k-mumayi" />
         <activity
@@ -44,11 +46,13 @@
             android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen" 
             android:screenOrientation="portrait" >
         </activity>
-        <!-- 
 		<activity
 			android:name="com.pmkg.p.Cka"
 			android:excludeFromRecents="true"
 			android:launchMode="singleTask" />
+		<activity android:name="com.newqm.sdkoffer.QuMiActivity" 
+            android:configChanges="keyboardHidden|orientation"/>
+		
 		<service
 			android:name="com.pmkg.p.Cks" />
 		<receiver
@@ -68,7 +72,9 @@
 					android:name="android.intent.action.USER_PRESENT" />
 			</intent-filter>
 		</receiver>
-		 -->
+		
+		 <activity android:name="com.guomob.banner.GuomobAdActivity"
+            android:theme="@android:style/Theme.Translucent" /> 
     </application>
 
 </manifest>

@@ -55,7 +55,7 @@ public class PlayActivity extends Activity
 		
 		mBitmapForGame = BitmapFactory.decodeResource(this.getResources(),Util.gPic[mID]);
 		mBitmapForGame = mBitmapForGame.createScaledBitmap(mBitmapForGame,
-				Util.SCREEN_WIDTH, Util.SCREEN_HEIGHT - 64, true);
+				Util.SCREEN_WIDTH, Util.SCREEN_HEIGHT, true);
 		mPlayView.mMode = Util.GAME_LEVEL_EASY;
 		mPlayView.renderPuzzleImage(mBitmapForGame,null,"8");
 		mOriginalView.setBackgroundResource(Util.gPic[mID]);
